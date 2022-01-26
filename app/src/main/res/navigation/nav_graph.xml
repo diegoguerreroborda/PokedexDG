@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pokemonListFragment">
+
+    <fragment
+        android:id="@+id/pokemonListFragment"
+        android:name="com.dhgb.pokeapidg.ui.view.fragments.PokemonListFragment"
+        android:label="fragment_pokemon_list"
+        tools:layout="@layout/fragment_pokemon_list" />
+    <fragment
+        android:id="@+id/getStartedFragment"
+        android:name="com.dhgb.pokeapidg.ui.view.fragments.GetStartedFragment"
+        android:label="fragment_get_started"
+        tools:layout="@layout/fragment_get_started" />
+    <fragment
+        android:id="@+id/placeListFragment"
+        android:name="com.dhgb.pokeapidg.ui.view.fragments.PlaceListFragment"
+        android:label="fragment_place_list"
+        tools:layout="@layout/fragment_place_list" />
+</navigation>
