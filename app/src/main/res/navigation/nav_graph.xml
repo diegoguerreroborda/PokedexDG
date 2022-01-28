@@ -9,7 +9,11 @@
         android:id="@+id/pokemonListFragment"
         android:name="com.dhgb.pokeapidg.ui.view.fragments.PokemonListFragment"
         android:label="fragment_pokemon_list"
-        tools:layout="@layout/fragment_pokemon_list" />
+        tools:layout="@layout/fragment_pokemon_list" >
+        <action
+            android:id="@+id/action_pokemonListFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/getStartedFragment"
         android:name="com.dhgb.pokeapidg.ui.view.fragments.GetStartedFragment"
@@ -20,4 +24,16 @@
         android:name="com.dhgb.pokeapidg.ui.view.fragments.PlaceListFragment"
         android:label="fragment_place_list"
         tools:layout="@layout/fragment_place_list" />
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.dhgb.pokeapidg.ui.view.fragments.PokemonDetailFragment"
+        android:label="fragment_pokemon_detail"
+        tools:layout="@layout/fragment_pokemon_detail" >
+        <argument
+            android:name="namePokemon"
+            app:argType="string"/>
+        <argument
+            android:name="imgPokemon"
+            app:argType="string"/>
+    </fragment>
 </navigation>

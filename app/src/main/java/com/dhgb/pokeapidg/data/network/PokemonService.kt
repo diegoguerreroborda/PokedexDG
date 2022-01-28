@@ -1,22 +1,24 @@
 package com.dhgb.pokeapidg.data.network
 
-import android.util.Log
 import com.dhgb.pokeapidg.core.RetrofitHelper
+import com.dhgb.pokeapidg.data.model.DefaultImg
+import com.dhgb.pokeapidg.data.model.Other
 import com.dhgb.pokeapidg.data.model.PokemonModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import retrofit2.Call
+import com.dhgb.pokeapidg.data.model.Sprites
 
 class PokemonService {
 
     private val retrofit = RetrofitHelper.getRetrofit()
 
-    suspend fun getPokemon(): List<PokemonModel> {
-        return withContext(Dispatchers.IO) {
-            Log.d("viewmodel", "Entra a PokemonService")
-            val response = retrofit.create(PokemonAPICLient::class.java).getPokemon("1")
-            Log.d("viewmodel", "ds $response.body()")
-            response.body() ?: emptyList()
+    suspend fun getPokemon(index: String): PokemonModel? {
+        val call = retrofit.create(PokemonAPICLient::class.java).getPokemon("$index")
+        val eachPokemon = call.body()
+        if(call.isSuccessful){
+            if (eachPokemon != null) {
+                return PokemonModel(eachPokemon.id, eachPokemon.name, Sprites(Other(DefaultImg(eachPokemon.img.other.dreamWorld.firstImg))),
+                        eachPokemon.weight, eachPokemon.height, eachPokemon.baseExperience, eachPokemon.types)
+            }
         }
+        return null
     }
 }

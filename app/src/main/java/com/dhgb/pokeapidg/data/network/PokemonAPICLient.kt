@@ -11,10 +11,7 @@ import retrofit2.http.Url
 interface PokemonAPICLient {
 
     @GET
-    suspend fun getPokemon(@Url url: String): Response<List<PokemonModel>>
-
-    @GET
-    suspend fun getPokemon2(@Url url: String): Response<PokemonModel>
+    suspend fun getPokemon(@Url url: String): Response<PokemonModel>
 
     @GET("{dexNumOrName}/")
     fun getPokemonByDexNumOrName(@Path("dexNumOrName") dexNumOrName: String?): Call<PokemonModel?>?

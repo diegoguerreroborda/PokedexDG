@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="gray_wave">#273036</color>
-    <color name="yellow_pikachu">#FACE3A</color>
+    <color name="yellow_pikachu">#FFCB05</color>
     <color name="blue_700">#2F4858</color>
+
+    <color name="blue_card_pokemon">#c5dbec</color>
+    <color name="blue_text_card_pokemon">#1570B3</color>
 </resources>

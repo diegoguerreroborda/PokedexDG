@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/blue_text_card_pokemon</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -20,5 +20,18 @@
 
     <style name="Button.White" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="searchIcon">@drawable/ic_baseline_search_24</item>
+        <item name="android:tint">@color/white</item>
+        <!-- Query Text Color -->
+        <item name="android:editTextColor">@color/blue_text_card_pokemon</item>
+        <item name="android:textColorPrimary">@color/blue_text_card_pokemon</item>
+        <item name="android:background">@drawable/background_search_view</item>
+        <item name="android:textColor">@color/blue_text_card_pokemon</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="android:textColorHint">@color/blue_card_pokemon</item>
+        <item name="queryHint">@string/search_hint</item>
     </style>
 </resources>

@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.dhgb.pokeapidg.data.model.PokemonModel
@@ -23,14 +25,12 @@ class PokemonListFragment : Fragment() {
 
     private val pokemonViewModel: PokemonViewModel by viewModels()
 
-    private val pokemonList = mutableListOf<PokemonModel>()
-
     private lateinit var adapter: PokemonAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPokemonListBinding.inflate(inflater, container, false)
         Log.d("fragmmento", "Inicializa PokemonListFragment")
         pokemonViewModel.onCreate()
@@ -40,21 +40,58 @@ class PokemonListFragment : Fragment() {
         })
 
         pokemonViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
-            Log.i("TAG", "gola $it")
             initRecyclerView(it)
+        })
+
+        binding.svPokemon.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Log.i("CALLAPI","Press querysubmit")
+                if(!query.isNullOrEmpty()){
+                    pokemonViewModel.searchPokemonByName(query.toLowerCase())
+                }
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
         })
 
         return binding.root
     }
 
-    private fun initRecyclerView(adapter2: List<PokemonModel>) {
-        adapter = PokemonAdapter(adapter2)
+    private fun initRecyclerView(adapterCurrent: List<PokemonModel>) {
+        Log.d("POKELIST", "Recycler")
+        adapter = PokemonAdapter(adapterCurrent)
+        binding.rvPokemonList.layoutManager = null
         binding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         binding.rvPokemonList.adapter = adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("POKELIST", "Onstart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("POKELIST", "Onresume")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Aqui bindeo los componentes como para poner setOnClickListener
     }
+//
+//    override fun onQueryTextSubmit(query: String?): Boolean {
+//        Log.d("CALLAPI", "Aqui empieza")
+//        if(!query.isNullOrEmpty()){
+//            pokemonViewModel.searchPokemonByName(query.toLowerCase())
+//        }
+//        return true
+//    }
+//
+//    override fun onQueryTextChange(newText: String?): Boolean {
+//        Log.d("CALLAPI", "Aqui empieza")
+//        return true
+//    }
 }
