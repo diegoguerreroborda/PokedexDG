@@ -24,8 +24,7 @@ class PokemonViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private fun clickItem (pokemon:PokemonModel) {
         binding.root.setOnClickListener {
-            val direction = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(pokemon.name,
-                    pokemon.img.other.dreamWorld.firstImg)
+            val direction = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(pokemon)
             Navigation.findNavController(binding.root).navigate(direction)
         }
     }

@@ -30,10 +30,7 @@
         android:label="fragment_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
         <argument
-            android:name="namePokemon"
-            app:argType="string"/>
-        <argument
-            android:name="imgPokemon"
-            app:argType="string"/>
+            android:name="pokemonModel"
+            app:argType="com.dhgb.pokeapidg.data.model.PokemonModel" />
     </fragment>
 </navigation>

@@ -16,7 +16,7 @@ class PokemonService {
         if(call.isSuccessful){
             if (eachPokemon != null) {
                 return PokemonModel(eachPokemon.id, eachPokemon.name, Sprites(Other(DefaultImg(eachPokemon.img.other.dreamWorld.firstImg))),
-                        eachPokemon.weight, eachPokemon.height, eachPokemon.baseExperience, eachPokemon.types)
+                        eachPokemon.weight, eachPokemon.height, eachPokemon.baseExperience, eachPokemon.types, eachPokemon.stats)
             }
         }
         return null

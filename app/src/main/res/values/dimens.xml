@@ -18,4 +18,5 @@
     <dimen name="height_loading">120dp</dimen>
     <dimen name="elevation_card">8dp</dimen>
     <dimen name="radius_card">8dp</dimen>
+    <dimen name="height_porgress_bar">5dp</dimen>
 </resources>

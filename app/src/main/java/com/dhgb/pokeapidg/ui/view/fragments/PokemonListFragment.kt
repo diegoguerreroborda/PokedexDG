@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
@@ -37,6 +38,10 @@ class PokemonListFragment : Fragment() {
 
         pokemonViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             binding.progress.isVisible = it
+        })
+
+        pokemonViewModel.showToast.observe(viewLifecycleOwner, Observer {
+            showToast("No se encontraron pokemon")
         })
 
         pokemonViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
@@ -81,17 +86,8 @@ class PokemonListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //Aqui bindeo los componentes como para poner setOnClickListener
     }
-//
-//    override fun onQueryTextSubmit(query: String?): Boolean {
-//        Log.d("CALLAPI", "Aqui empieza")
-//        if(!query.isNullOrEmpty()){
-//            pokemonViewModel.searchPokemonByName(query.toLowerCase())
-//        }
-//        return true
-//    }
-//
-//    override fun onQueryTextChange(newText: String?): Boolean {
-//        Log.d("CALLAPI", "Aqui empieza")
-//        return true
-//    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
 }

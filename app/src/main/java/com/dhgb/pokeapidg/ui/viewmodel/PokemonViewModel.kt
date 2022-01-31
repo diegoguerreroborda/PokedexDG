@@ -19,9 +19,13 @@ class PokemonViewModel : ViewModel() {
 
     val isLoading = MutableLiveData<Boolean>()
 
+    val showToast = MutableLiveData<Boolean>()
+
     fun onCreate() {
-        _pokemonList.clear()
-        getAllPokemon()
+        if(_pokemonList.isEmpty()){
+            _pokemonList.clear()
+            getAllPokemon()
+        }
     }
 
     private fun getAllPokemon() {
@@ -34,9 +38,11 @@ class PokemonViewModel : ViewModel() {
                 }else{
                     //La api no responde más
                     //Mostrar view de no internet
+                    showToast.postValue(true)
+                    isLoading.postValue(false)
                 }
             }
-            Log.d("POKEVIEWMODEL", "${_pokemonList}")
+            Log.d("POKEVIEWMODEL", "${_pokemonList[0].stats}")
             pokemonList.postValue(_pokemonList)
             isLoading.postValue(false)
         }
@@ -53,9 +59,7 @@ class PokemonViewModel : ViewModel() {
                 pokemonList.postValue(_pokemonList)
                 isLoading.postValue(false)
             }else{
-                //La api no responde más
-                //Mostrar view de no internet
-                //Toast.makeText(this,  "No existe ese pokemon", Toast.LENGTH_SHORT).show()
+                showToast.postValue(true)
                 isLoading.postValue(false)
             }
         }
