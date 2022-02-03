@@ -19,4 +19,6 @@
     <dimen name="elevation_card">8dp</dimen>
     <dimen name="radius_card">8dp</dimen>
     <dimen name="height_porgress_bar">5dp</dimen>
+
+    <dimen name="padding_fav_lottie">4dp</dimen>
 </resources>

@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_menu_place"
         android:title="Lugares"/>
     <item
-        android:id="@+id/getStartedFragment"
+        android:id="@+id/favouritePokemonFragment"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Favoritos" />
 </menu>

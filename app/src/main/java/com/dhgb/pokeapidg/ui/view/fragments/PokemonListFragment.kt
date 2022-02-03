@@ -2,21 +2,22 @@ package com.dhgb.pokeapidg.ui.view.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhgb.pokeapidg.data.model.PokemonModel
 import com.dhgb.pokeapidg.databinding.FragmentPokemonListBinding
-import com.dhgb.pokeapidg.ui.viewmodel.PokemonViewModel
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhgb.pokeapidg.ui.view.adapter.PokemonAdapter
+import com.dhgb.pokeapidg.ui.view.adapter.PokemonAdapter.OnItemClickListener
+import com.dhgb.pokeapidg.ui.viewmodel.PokemonListViewModel
 
 
 class PokemonListFragment : Fragment() {
@@ -24,7 +25,7 @@ class PokemonListFragment : Fragment() {
     private var _binding: FragmentPokemonListBinding? = null
     private val binding get() = _binding!!
 
-    private val pokemonViewModel: PokemonViewModel by viewModels()
+    private val pokemonListViewModel: PokemonListViewModel by viewModels()
 
     private lateinit var adapter: PokemonAdapter
 
@@ -34,28 +35,28 @@ class PokemonListFragment : Fragment() {
     ): View {
         _binding = FragmentPokemonListBinding.inflate(inflater, container, false)
         Log.d("fragmmento", "Inicializa PokemonListFragment")
-        pokemonViewModel.onCreate()
+        pokemonListViewModel.onCreate(binding.root.context)
 
-        pokemonViewModel.isLoading.observe(viewLifecycleOwner, Observer {
+        pokemonListViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             binding.progress.isVisible = it
         })
 
-        pokemonViewModel.showToast.observe(viewLifecycleOwner, Observer {
+        pokemonListViewModel.showToast.observe(viewLifecycleOwner, Observer {
             showToast("No se encontraron pokemon")
         })
 
-        pokemonViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
+        pokemonListViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
             initRecyclerView(it)
         })
 
         binding.svPokemon.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                Log.i("CALLAPI","Press querysubmit")
-                if(!query.isNullOrEmpty()){
-                    pokemonViewModel.searchPokemonByName(query.toLowerCase())
+                if (!query.isNullOrEmpty()) {
+                    pokemonListViewModel.searchPokemonByName(query.toLowerCase())
                 }
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 return true
             }
@@ -66,20 +67,23 @@ class PokemonListFragment : Fragment() {
 
     private fun initRecyclerView(adapterCurrent: List<PokemonModel>) {
         Log.d("POKELIST", "Recycler")
-        adapter = PokemonAdapter(adapterCurrent)
-        binding.rvPokemonList.layoutManager = null
+        adapter = PokemonAdapter(adapterCurrent, object : OnItemClickListener {
+            override fun onItemClick(pokemonModel: PokemonModel, position: Int) {
+                val direction = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(pokemonModel)
+                Navigation.findNavController(binding.root).navigate(direction)
+            }
+
+            override fun addToFav(pokemonModel: PokemonModel) {
+                pokemonListViewModel.addPokemonToDB(pokemonModel)
+            }
+
+            override fun removeToFav(pokemonModel: PokemonModel, position: Int) {
+                //TODO("Not yet implemented")
+            }
+        })
+//        binding.rvPokemonList.layoutManager = null
         binding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         binding.rvPokemonList.adapter = adapter
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("POKELIST", "Onstart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("POKELIST", "Onresume")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

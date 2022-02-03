@@ -15,11 +15,6 @@
             app:destination="@id/pokemonDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/getStartedFragment"
-        android:name="com.dhgb.pokeapidg.ui.view.fragments.GetStartedFragment"
-        android:label="fragment_get_started"
-        tools:layout="@layout/fragment_get_started" />
-    <fragment
         android:id="@+id/placeListFragment"
         android:name="com.dhgb.pokeapidg.ui.view.fragments.PlaceListFragment"
         android:label="fragment_place_list"
@@ -33,4 +28,9 @@
             android:name="pokemonModel"
             app:argType="com.dhgb.pokeapidg.data.model.PokemonModel" />
     </fragment>
+    <fragment
+        android:id="@+id/favouritePokemonFragment"
+        android:name="com.dhgb.pokeapidg.ui.view.fragments.FavouritePokemonFragment"
+        android:label="fragment_favourite_pokemon"
+        tools:layout="@layout/fragment_favourite_pokemon" />
 </navigation>

@@ -8,6 +8,7 @@ import com.dhgb.pokeapidg.data.model.Sprites
 
 class PokemonService {
 
+
     private val retrofit = RetrofitHelper.getRetrofit()
 
     suspend fun getPokemon(index: String): PokemonModel? {

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.dhgb.pokeapidg.R
 import com.dhgb.pokeapidg.data.model.Stats
@@ -18,30 +19,32 @@ class PokemonDetailFragment : Fragment() {
     private var _binding: FragmentPokemonDetailBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
 
         arguments?.let {
             val pokemon = PokemonDetailFragmentArgs.fromBundle(it).pokemonModel
-            binding.ivWave.setBackgroundResource(changeResourceTypePokemon(pokemon.types[0].type.name))
+            binding.ivWave.setColorFilter(
+                ContextCompat.getColor(
+                    requireContext(), changeColorTypePokemon(
+                        pokemon.types[0].type.name
+                    )
+                ), android.graphics.PorterDuff.Mode.SRC_IN
+            )
+         binding.lottieFav.progress = 0.2f
             Picasso.get().load(pokemon.img.other.dreamWorld.firstImg).into(binding.ivPokemon)
             binding.tvNamePokemon.text = upperCaseFirst(pokemon.name)
             binding.tvBaseExperiencePokemon.text = pokemon.baseExperience.toString()
             binding.tvWeightPokemon.text = "${pokemon.weight} kg"
             binding.tvHeightPokemon.text = "${pokemon.height} m"
 
-            //binding.ivWave.background.setTint(R.drawable.wave_pokemon)
-            //binding.ivWave.setBackgroundColor(R.drawable.wave_pokemon_fire)
-//            binding.ivWave.setBackgroundColor(changeColorTypePokemon(pokemon.types[0].type.name))
-//            binding.ivWave.background.colorFilter = Color.argb(255, 255, 255, 255)
-//            R.drawable.wave_pokemon.
-
             if (pokemon.stats.isNotEmpty()) {
                 sortStats(pokemon.stats)
             }
         }
-
         return binding.root
     }
 
@@ -54,62 +57,73 @@ class PokemonDetailFragment : Fragment() {
             when (stat.stat.name) {
                 "hp" -> {
                     binding.tvStatHp.text = stat.baseStat.toString()
-                    val anim = ProgressBarAnimation(binding.pbHp, Constants.FROM_PROGRESS_BAR, stat.baseStat)
+                    val anim = ProgressBarAnimation(
+                        binding.pbHp,
+                        Constants.FROM_PROGRESS_BAR,
+                        stat.baseStat
+                    )
                     binding.pbHp.startAnimation(anim)
                 }
                 "attack" -> {
                     binding.tvStatAtk.text = stat.baseStat.toString()
-                    val anim = ProgressBarAnimation(binding.pbAttack, Constants.FROM_PROGRESS_BAR, stat.baseStat)
+                    val anim = ProgressBarAnimation(
+                        binding.pbAttack,
+                        Constants.FROM_PROGRESS_BAR,
+                        stat.baseStat
+                    )
                     binding.pbAttack.startAnimation(anim)
                 }
                 "defense" -> {
                     binding.tvStatDef.text = stat.baseStat.toString()
-                    val anim = ProgressBarAnimation(binding.pbDefense, Constants.FROM_PROGRESS_BAR, stat.baseStat)
+                    val anim = ProgressBarAnimation(
+                        binding.pbDefense,
+                        Constants.FROM_PROGRESS_BAR,
+                        stat.baseStat
+                    )
                     binding.pbDefense.startAnimation(anim)
                 }
             }
         }
     }
 
-    private fun changeResourceTypePokemon(type: String): Int {
+    private fun changeColorTypePokemon(type: String): Int {
         Log.d("POKECOLOR", "Cambia color $type")
         when (type) {
             "grass" -> {
-                return R.drawable.wave_pokemon_grass
+                return R.color.type_grass
             }
             "electric" -> {
-                return R.drawable.wave_pokemon_electric
+                return R.color.type_electric
             }
             "water" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_water
             }
             "fire" -> {
-                return R.drawable.wave_pokemon_fire
+                return R.color.type_fire
             }
             "bug" -> {
-                return R.drawable.wave_pokemon_bug
+                return R.color.type_bug
             }
             "poison" -> {
-                return R.drawable.wave_pokemon_poison
+                return R.color.type_poison
             }
             "normal" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_normal
             }
             "ghost" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_ghost
             }
             "psychic" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_psychic
             }
             "ground" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_ground
             }
             "dark" -> {
-                return R.drawable.wave_pokemon_water
+                return R.color.type_dark
             }
-            else -> return R.drawable.wave_get_started
+            else -> return R.color.black
         }
-
     }
 
     object Constants {

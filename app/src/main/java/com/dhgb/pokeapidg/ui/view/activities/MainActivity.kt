@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dhgb.pokeapidg.R
+import com.dhgb.pokeapidg.data.database.PokemonDb
 import com.dhgb.pokeapidg.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,5 +22,7 @@ class MainActivity : AppCompatActivity() {
             //Ir al home
             startActivity(Intent(this, HomeActivity::class.java))
         }
+
+        val db = PokemonDb.DatabaseProvider.getDataBase(baseContext).pokemonDao()
     }
 }
