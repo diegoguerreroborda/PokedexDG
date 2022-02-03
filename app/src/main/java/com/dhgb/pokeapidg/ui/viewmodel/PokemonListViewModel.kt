@@ -20,8 +20,8 @@ class PokemonListViewModel() : ViewModel() {
     private lateinit var context: Context
     private lateinit var db: PokemonDao
 
-    val pokemonList = MutableLiveData<List<PokemonModel>>()
-    var _pokemonList = ArrayList<PokemonModel>()
+    val mutablePokemonList = MutableLiveData<List<PokemonModel>>()
+    var pokemonList = ArrayList<PokemonModel>()
 
     val isLoading = MutableLiveData<Boolean>()
 
@@ -30,8 +30,8 @@ class PokemonListViewModel() : ViewModel() {
     fun onCreate(contextC: Context) {
         context = contextC
         db = PokemonDb.DatabaseProvider.getDataBase(context).pokemonDao()
-        if(_pokemonList.isEmpty()){
-            _pokemonList.clear()
+        if(pokemonList.isEmpty()){
+            pokemonList.clear()
             getAllPokemon()
         }
     }
@@ -42,7 +42,7 @@ class PokemonListViewModel() : ViewModel() {
             for (i in 1..25) {
                 val pokemon = api.getPokemon("$i")
                 if(pokemon != null){
-                    _pokemonList.add(pokemon!!)
+                    pokemonList.add(pokemon!!)
                 }else{
                     //La api no responde más
                     //Mostrar view de no internet
@@ -50,8 +50,8 @@ class PokemonListViewModel() : ViewModel() {
                     isLoading.postValue(false)
                 }
             }
-            Log.d("POKEVIEWMODEL", "${_pokemonList[0].stats}")
-            pokemonList.postValue(_pokemonList)
+            Log.d("POKEVIEWMODEL", "${pokemonList[0].stats}")
+            mutablePokemonList.postValue(pokemonList)
             isLoading.postValue(false)
         }
     }
@@ -61,10 +61,10 @@ class PokemonListViewModel() : ViewModel() {
             isLoading.postValue(true)
             val pokemon = api.getPokemon("$name")
             if(pokemon != null){
-                _pokemonList.clear()
-                //pokemonList.postValue(emptyList())
-                _pokemonList.add(pokemon!!)
-                pokemonList.postValue(_pokemonList)
+                pokemonList.clear()
+                //mutablePokemonList.postValue(emptyList())
+                pokemonList.add(pokemon!!)
+                mutablePokemonList.postValue(pokemonList)
                 isLoading.postValue(false)
             }else{
                 showToast.postValue(true)

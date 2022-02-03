@@ -45,7 +45,7 @@ class PokemonListFragment : Fragment() {
             showToast("No se encontraron pokemon")
         })
 
-        pokemonListViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
+        pokemonListViewModel.mutablePokemonList.observe(viewLifecycleOwner, Observer {
             initRecyclerView(it)
         })
 
@@ -78,9 +78,9 @@ class PokemonListFragment : Fragment() {
             }
 
             override fun removeToFav(pokemonModel: PokemonModel, position: Int) {
-                //TODO("Not yet implemented")
+                Log.d("REMOVE", "remover del listView")
             }
-        })
+        }, 0.2f)
 //        binding.rvPokemonList.layoutManager = null
         binding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         binding.rvPokemonList.adapter = adapter

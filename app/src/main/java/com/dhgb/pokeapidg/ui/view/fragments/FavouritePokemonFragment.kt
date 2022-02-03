@@ -35,7 +35,7 @@ class FavouritePokemonFragment : Fragment() {
             binding.progress.isVisible = it
         })
 
-        favouritePokemonViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
+        favouritePokemonViewModel.mutablePokemonList.observe(viewLifecycleOwner, Observer {
             initRecyclerView(it)
         })
 
@@ -56,8 +56,9 @@ class FavouritePokemonFragment : Fragment() {
                 Log.d("BORRAR", "Aqui comienza")
                 favouritePokemonViewModel.removePokemonToDB(pokemonModel)
 //                adapter.notifyItemRemoved(position)
+
             }
-        })
+        }, 1f)
         binding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         binding.rvPokemonList.adapter = adapter
     }

@@ -1,5 +1,6 @@
 package com.dhgb.pokeapidg.ui.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,8 @@ import com.dhgb.pokeapidg.data.model.PokemonModel
 
 class PokemonAdapter(
     private val pokemonList: List<PokemonModel>,
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnItemClickListener,
+    private val progressFav: Float
     ): RecyclerView.Adapter<PokemonViewHolder>() {
 
     interface OnItemClickListener {
@@ -24,8 +26,11 @@ class PokemonAdapter(
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
+        Log.d("ERRORES", "position es $position")
         val item = pokemonList[position]
-        holder.bind(item, position)
+        if(item != null){
+            holder.bind(item, position, progressFav)
+        }
     }
 
     override fun getItemCount(): Int = pokemonList.size

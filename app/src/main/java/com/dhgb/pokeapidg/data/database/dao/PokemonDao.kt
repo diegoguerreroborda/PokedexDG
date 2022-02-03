@@ -6,13 +6,13 @@ import com.dhgb.pokeapidg.data.database.entities.PokemonEntity
 @Dao
 interface PokemonDao {
 
-    @Query("SELECT * FROM pokemon_table ORDER BY pokemonName DESC")
+    @Query("SELECT * FROM pokemon_table ORDER BY id ASC")
     suspend fun getAllPokemon(): List<PokemonEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(pokemonList:List<PokemonEntity>)
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOne(pokemon: PokemonEntity)
 
     @Delete()

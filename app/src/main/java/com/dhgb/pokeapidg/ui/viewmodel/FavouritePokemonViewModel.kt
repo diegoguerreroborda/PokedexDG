@@ -21,9 +21,9 @@ class FavouritePokemonViewModel: ViewModel() {
     private val stats: List<Stats> = listOf(Stats(1, Stat("stat1")))
 
     val isLoading = MutableLiveData<Boolean>()
-    val pokemonList = MutableLiveData<List<PokemonModel>>()
+    val mutablePokemonList = MutableLiveData<List<PokemonModel>>()
 
-    var _pokemonList = ArrayList<PokemonModel>()
+    var pokemonList = ArrayList<PokemonModel>()
 
     fun onCreate(contextC: Context) {
         context = contextC
@@ -32,19 +32,19 @@ class FavouritePokemonViewModel: ViewModel() {
     }
 
     private fun getAllPokemon() {
-        _pokemonList.clear()
+        pokemonList.clear()
         CoroutineScope(Dispatchers.IO).launch {
             isLoading.postValue(true)
-            val pokemonListDb = db.getAllPokemon()
-            if(pokemonListDb.isNotEmpty()){
+            val mutablemutablePokemonListDb = db.getAllPokemon()
+            if(mutablemutablePokemonListDb.isNotEmpty()){
                 for (itemEntity in db.getAllPokemon()){
                     Log.d("ENTITY", "item id es ${itemEntity.id}")
-                    _pokemonList.add(PokemonModel(itemEntity.id, itemEntity.pokemonName,
+                    pokemonList.add(PokemonModel(itemEntity.id, itemEntity.pokemonName,
                         Sprites(Other(
                         DefaultImg(itemEntity.pokemonImg)
                     )), 50f, 50f, 50, types, stats))
                 }
-                pokemonList.postValue(_pokemonList)
+                mutablePokemonList.postValue(pokemonList)
                 isLoading.postValue(false)
             }else{
                 //Está vacio
@@ -61,10 +61,11 @@ class FavouritePokemonViewModel: ViewModel() {
                 PokemonEntity(
                     id = pokemonModel.id,
                     pokemonName = pokemonModel.name,
-                    pokemonImg = pokemonModel.img.other.dreamWorld.firstImg)
+                    pokemonImg = pokemonModel.img.other.dreamWorld.firstImg
+                )
             )
-            _pokemonList.remove(pokemonModel)
         }
-        pokemonList.postValue(_pokemonList)
+        pokemonList.remove(pokemonModel)
+        mutablePokemonList.postValue(pokemonList)
     }
 }
