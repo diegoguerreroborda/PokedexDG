@@ -75,7 +75,6 @@ class PokemonListViewModel() : ViewModel() {
 
     fun addPokemonToDB(pokemonModel: PokemonModel) {
         CoroutineScope(Dispatchers.IO).launch {
-//            db.deleteAll()
             db.insertOne(PokemonEntity(
                 id = pokemonModel.id,
                 pokemonName = pokemonModel.name,

@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿Qué Pokémon quieres consultar?"
+        android:text="@string/search_pokemon_text"
         android:textColor="@color/white"
         android:textSize="@dimen/text_3"
         android:textStyle="bold"

@@ -5,13 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.dhgb.pokeapidg.R
 import com.dhgb.pokeapidg.data.model.Stats
 import com.dhgb.pokeapidg.databinding.FragmentPokemonDetailBinding
 import com.dhgb.pokeapidg.ui.component.ProgressBarAnimation
+import com.dhgb.pokeapidg.ui.viewmodel.PokemonDetailViewModel
 import com.squareup.picasso.Picasso
 
 
@@ -19,6 +23,8 @@ class PokemonDetailFragment : Fragment() {
 
     private var _binding: FragmentPokemonDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val pokemonDetailViewModel: PokemonDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +35,12 @@ class PokemonDetailFragment : Fragment() {
         binding.llBack.setOnClickListener{
             requireActivity().onBackPressed()
         }
+
+        pokemonDetailViewModel.onCreate(binding.root.context)
+
+        pokemonDetailViewModel.showToast.observe(viewLifecycleOwner, Observer {
+            showToast("Pokemon agregado correctamente")
+        })
 
         arguments?.let {
             val pokemon = PokemonDetailFragmentArgs.fromBundle(it).pokemonModel
@@ -48,6 +60,16 @@ class PokemonDetailFragment : Fragment() {
 
             if (pokemon.stats.isNotEmpty()) {
                 sortStats(pokemon.stats)
+            }
+
+            binding.lottieFav.setOnClickListener{
+                if(binding.lottieFav.progress == 0.2f){
+                    binding.lottieFav.speed = 2f
+                    binding.lottieFav.playAnimation()
+                    pokemonDetailViewModel.addPokemonToDB(pokemon)
+                }else{
+                    binding.lottieFav.progress = 0.2f
+                }
             }
         }
         return binding.root
@@ -129,6 +151,10 @@ class PokemonDetailFragment : Fragment() {
             }
             else -> return R.color.black
         }
+    }
+
+    private fun showToast(message: String){
+        Toast.makeText(binding.root.context,  message, Toast.LENGTH_SHORT).show()
     }
 
     object Constants {

@@ -18,4 +18,6 @@
     <string name="height_text">Altura</string>
     <string name="base_stats_text">Estadísticas Básicas</string>
     <string name="pokedex_low_case">Pokédex</string>
+    <string name="search_pokemon_text">¿Qué Pokémon quieres consultar?</string>
+    <string name="favourite_pokemon_header_text">Tus pokemon favoritos</string>
 </resources>

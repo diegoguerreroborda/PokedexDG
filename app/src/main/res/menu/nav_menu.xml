@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_menu_pokemon"
         android:title="Pokedex" />
     <item
-        android:id="@+id/placeListFragment"
-        android:icon="@drawable/ic_menu_place"
-        android:title="Lugares"/>
-    <item
         android:id="@+id/favouritePokemonFragment"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Favoritos" />
