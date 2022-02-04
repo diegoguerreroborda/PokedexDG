@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.dhgb.pokeapidg.R
 import com.dhgb.pokeapidg.data.database.PokemonDb
 import com.dhgb.pokeapidg.databinding.ActivityMainBinding
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,10 @@ class MainActivity : AppCompatActivity() {
             //Ir al home
             startActivity(Intent(this, HomeActivity::class.java))
         }
+    }
 
-        val db = PokemonDb.DatabaseProvider.getDataBase(baseContext).pokemonDao()
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        exitProcess(-1)
     }
 }

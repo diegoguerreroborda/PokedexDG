@@ -84,6 +84,7 @@ class PokemonListFragment : Fragment() {
 //        binding.rvPokemonList.layoutManager = null
         binding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         binding.rvPokemonList.adapter = adapter
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,5 +94,13 @@ class PokemonListFragment : Fragment() {
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showHas(obj: Any) {
+        print(("${obj.hashCode()}"))
+    }
+
+    fun main() {
+        showHas(1)
     }
 }

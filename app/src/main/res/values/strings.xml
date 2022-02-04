@@ -1,14 +1,21 @@
 <resources>
     <string name="app_name">PokeApiDG</string>
+    <string name="app_name_get_started">POKÉDEX</string>
     <string name="author_name">Diego Guerrero</string>
     <string name="get_started">Empezar</string>
     <string name="pokedex">Pokedex DG</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search_hint">pikachu</string>
+    <string name="search_hint">Pikachu</string>
     <string name="default_stat">0</string>
     <string name="special_attack_ab">SPA</string>
     <string name="defense_ab">DEF</string>
     <string name="attack_ab">ATK</string>
     <string name="hp_ab">HP</string>
+    <string name="description_app">Esta aplicación te ayudará a ver detalles de cada uno de los pokemon que acompañaron tu infancia.</string>
+    <string name="base_experience_text">Experiencia \nBásica</string>
+    <string name="weight_text">Peso</string>
+    <string name="height_text">Altura</string>
+    <string name="base_stats_text">Estadísticas Básicas</string>
+    <string name="pokedex_low_case">Pokédex</string>
 </resources>

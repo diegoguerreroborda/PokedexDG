@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.dhgb.pokeapidg.R
@@ -24,6 +25,10 @@ class PokemonDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
+
+        binding.llBack.setOnClickListener{
+            requireActivity().onBackPressed()
+        }
 
         arguments?.let {
             val pokemon = PokemonDetailFragmentArgs.fromBundle(it).pokemonModel
@@ -129,4 +134,5 @@ class PokemonDetailFragment : Fragment() {
     object Constants {
         const val FROM_PROGRESS_BAR = 0
     }
+
 }

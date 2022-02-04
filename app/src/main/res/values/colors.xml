@@ -15,17 +15,20 @@
     <color name="blue_card_pokemon">#c5dbec</color>
     <color name="blue_text_card_pokemon">#1570B3</color>
 
-    <color name="type_grass">#73c7a1</color>
-    <color name="type_normal">#73c7a1</color>
-    <color name="type_electric">#044fa5</color>
-    <color name="type_ghost">#73c7a1</color>
-    <color name="type_water">#044fa5</color>
-    <color name="type_fire">#f8433f</color>
-    <color name="type_bug">#d54356</color>
-    <color name="type_poison">#b76dcf</color>
-    <color name="type_psychic">#73c7a1</color>
-    <color name="type_ground">#73c7a1</color>
-    <color name="type_dark">#73c7a1</color>
+    <color name="type_grass">#2d7c3e</color>
+    <color name="type_normal">#7c5762</color>
+    <color name="type_electric">#e2e331</color>
+    <color name="type_ghost">#32336b</color>
+    <color name="type_water">#266fe1</color>
+    <color name="type_fire">#ab2b29</color>
+    <color name="type_bug">#1c4b27</color>
+    <color name="type_poison">#604489</color>
+    <color name="type_psychic">#a63f6c</color>
+    <color name="type_ground">#6e491f</color>
+    <color name="type_dark">#040707</color>
+
+    <color name="background_blue_light">#129AFF</color>
+    <color name="background_blue_dark">#1570B3</color>
 
 
 </resources>
